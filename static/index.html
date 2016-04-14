@@ -20,13 +20,57 @@
 				})
 			})
 
-			
+			myApp.factory('customerFactory', function(){
+				var factory = {};
+				var customers = [
+					{name: "David Bowie", date: '01/23/2020'},
+					{name: "David Lynch", date: '01/23/2000'},
+					{name: "David Cameron", date: '01/23/1200'},
+					{name: "David Goliath", date: '01/23/2001'},
+				]
+				factory.getCustomers = function(){
+					return customers;
+				}
+				factory.createCustomer = function(customer){
+					customers.push(customer)
+				}
+
+				return factory;
+			})
+
+			myApp.controller('customerController', function(customerFactory){
+				var customers = [];
+				var that = this;
+				var getCustomers = function(){
+					that.customers = customerFactory.getCustomers();
+				}
+				// customerFactory.sayHello();
+				this.customers = customerFactory.getCustomers();
+				// this.delete = customerFactory.deleteCustomer();
+				this.createCustomer = function(){
+					this.newcusto.date = new Date()
+					console.log(that.newcusto);
+					customerFactory.createCustomer(this.newcusto);
+					getCustomers();
+					this.newcusto = ''
+				}
+				this.predicate = 'name';
+				this.reverse = 'true';
+				this.order = function(predicate) {
+					this.reverse = (predicate === predicate) ? !this.reverse : false;
+					this.predicate = predicate;
+				};
+			})
+
+			// myApp.controller(ordersController, function(orderFactory){
+			// 	console.log(234)
+			// })
 
 		</script>
 	</head>
 	<body>
 		<div>
-			<a href="#/">players</a> | <a href="#/other">teams</a>
+			<a href="#/">customers</a> | <a href="#/other">orders</a>
 			<div ng-view="">
 			</div>
 		</div>
