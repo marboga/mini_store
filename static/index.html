@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+	<head>
+		<meta charset="utf-8">
+		<title>little store</title>
+		<script type="text/javascript" src='angular/angular.js'></script>
+		<script type="text/javascript" src='angular-route/angular-route.js'></script>
+		<script type="text/javascript">
+			var myApp = angular.module('myApp', ['ngRoute'])
+			myApp.config(function($routeProvider){
+				$routeProvider
+				.when('/', {
+					templateUrl: 'partials/partial1.html'
+				})
+				.when('/other', {
+					templateUrl: 'partials/partial2.html'
+				})
+				.otherwise({
+					redirectTo: '/'
+				})
+			})
+
+			
+
+		</script>
+	</head>
+	<body>
+		<div>
+			<a href="#/">players</a> | <a href="#/other">teams</a>
+			<div ng-view="">
+			</div>
+		</div>
+	</body>
+</html>
